@@ -1,0 +1,263 @@
+3M; Maplewood, MN
+Abbott Laboratories; Abbott Park, IL
+AbbVie; North Chicago, IL
+ABC; New York, NY
+Abercrombie & Fitch; New Albany, OH
+Accenture; Chicago, IL
+Adidas; Portland, OR
+Adobe; San Jose, CA
+Advanced Micro Devices; Santa Clara, CA
+Aetna; Hartford, CT
+AIG; New York, NY
+Alaska Airlines; Seattle, WA
+Alcoa; Pittsburgh, PA
+Allstate; Northbrook, IL
+Amazon; Seattle, WA
+American Airlines; Fort Worth, TX
+American Eagle; Pittsburgh, PA
+American Express; New York, NY
+American Tower; Boston, MA
+Amgen; Thousand Oaks, CA
+Anthem; Indianapolis, IN
+Apple; Cupertino, CA
+Applied Materials; Santa Clara, CA
+Arby's; Atlanta, GA
+AT&T; Dallas, TX
+Audi; Herndon, VA
+AutoZone; Memphis, TN
+Avon Products; New York, NY
+Baker Hughes; Houston, TX
+Banana Republic; San Francisco, CA
+Bank of America; Charlotte, NC
+Bath & Body Works; Columbus, OH
+Baxter International; Deerfield, IL
+Becton, Dickinson and Company; Franklin Lakes, NJ
+Ben & Jerry's; South Burlington, VT
+Berkshire Hathaway; Omaha, NE
+Best Buy; Richfield, MN
+Biogen; Cambridge, MA
+BJ's Wholesale Club; Westborough, MA
+BlackRock; New York, NY
+BMW; Woodcliff Lake, NJ
+Boeing; Chicago, IL
+Boston Scientific; Marlborough, MA
+Bristol-Myers Squibb; New York, NY
+Broadcom; San Jose, CA
+Burger King; Miami, FL
+C.H. Robinson Worldwide; Eden Prairie, MN
+Capital One; McLean, VA
+Cardinal Health; Dublin, OH
+Caterpillar Inc.; Peoria, IL
+Caterpillar; Deerfield, IL
+CBS; New York, NY
+Chevron; San Ramon, CA
+Chick-fil-A; Atlanta, GA
+Chipotle; Newport Beach, CA
+Cisco; San Jose, CA
+Citigroup; New York, NY
+CNN; Atlanta, GA
+Coca-Cola; Atlanta, GA
+Colgate-Palmolive; New York, NY
+Comcast; Philadelphia, PA
+ConocoPhillips; Houston, TX
+Costco; Issaquah, WA
+CoverGirl; Hunt Valley, MD
+Crown Castle; Houston, TX
+Cummins; Columbus, IN
+CVS Health; Woonsocket, RI
+Dairy Queen; Bloomington, MN
+Darden Restaurants; Orlando, FL
+Dell; Round Rock, TX
+Delta Air Lines; Atlanta, GA
+Disney; Burbank, CA
+Disney+; Burbank, CA
+Domino's; Ann Arbor, MI
+Dow Inc.; Midland, MI
+Duke Energy; Charlotte, NC
+Dunkin' Donuts; Canton, MA
+DuPont de Nemours; Wilmington, DE
+eBay; San Jose, CA
+Eli Lilly; Indianapolis, IN
+Emerson Electric; St. Louis, MO
+Enterprise Products; Houston, TX
+ESPN; Bristol, CT
+Estee Lauder; New York, NY
+Exelon; Chicago, IL
+ExxonMobil; Irving, TX
+Facebook; Menlo Park, CA
+FedEx; Memphis, TN
+Fidelity Investments; Boston, MA
+Ford; Dearborn, MI
+Forever 21; Los Angeles, CA
+Fox News; New York, NY
+Fox Sports; Los Angeles, CA
+Freddie Mac; McLean, VA
+Gap; San Francisco, CA
+General Dynamics; Reston, VA
+General Electric; Boston, MA
+General Motors; Detroit, MI
+Gilead Sciences; Foster City, CA
+Goldman Sachs; New York, NY
+Google; Mountain View, CA
+Halliburton; Houston, TX
+Harley-Davidson; Milwaukee, WI
+Hartford Financial Services; Hartford, CT
+HBO Max; New York, NY
+Hershey; Hershey, PA
+Hess Corporation; New York, NY
+Hilton; McLean, VA
+Home Depot; Atlanta, GA
+Honda; Torrance, CA
+Honeywell; Charlotte, NC
+HP; Palo Alto, CA
+Hulu; Santa Monica, CA
+Humana; Louisville, KY
+Hyatt; Chicago, IL
+Hyundai; Fountain Valley, CA
+IBM; Armonk, NY
+iHeartRadio; New York, NY
+Ingersoll Rand; Davidson, NC
+Intel; Santa Clara, CA
+Intercontinental Exchange; Atlanta, GA
+JCPenney; Plano, TX
+John Deere; Moline, IL
+Johnson & Johnson; New Brunswick, NJ
+JPMorgan Chase; New York, NY
+KFC; Louisville, KY
+Kia; Irvine, CA
+Kohl's; Menomonee Falls, WI
+Kraft Heinz; Chicago, IL
+Krispy Kreme; Winston-Salem, NC
+Kroger; Cincinnati, OH
+L Brands; Columbus, OH
+L3Harris Technologies; Melbourne, FL
+Las Vegas Sands; Las Vegas, NV
+Lennar Corporation; Miami, FL
+Lexus; Plano, TX
+Little Caesars; Detroit, MI
+Lockheed Martin; Bethesda, MD
+Lowe's; Mooresville, NC
+LyondellBasell Industries; Houston, TX
+Macy's; New York, NY
+Marathon Petroleum; Findlay, OH
+Marriott; Bethesda, MD
+Mars; McLean, VA
+Massachusetts Mutual Life Insurance; Springfield, MA
+Mastercard; Purchase, NY
+Maybelline; New York, NY
+McDonald's; Chicago, IL
+Mercedes-Benz; Atlanta, GA
+Merck; Kenilworth, NJ
+MetLife; New York, NY
+Metropolitan Life Insurance; New York, NY
+MGM Resorts International; Las Vegas, NV
+Micron Technology; Boise, ID
+Microsoft; Redmond, WA
+Moderna; Cambridge, MA
+Morgan Stanley; New York, NY
+Motorola Solutions; Chicago, IL
+MSNBC; New York, NY
+NASA; Washington, DC
+Nasdaq; New York, NY
+NBC; New York, NY
+Netflix; Los Gatos, CA
+Newmont Corporation; Greenwood Village, CO
+NextEra Energy; Juno Beach, FL
+Nike; Beaverton, OR
+Nissan; Franklin, TN
+Nordstrom; Seattle, WA
+Norfolk Southern; Norfolk, VA
+Northrop Grumman; Falls Church, VA
+Northwestern Mutual; Milwaukee, WI
+NVIDIA; Santa Clara, CA
+Occidental Petroleum; Houston, TX
+Old Navy; San Francisco, CA
+Oracle; Redwood City, CA
+PACCAR; Bellevue, WA
+Pandora; Oakland, CA
+Panera Bread; St. Louis, MO
+Papa John's; Louisville, KY
+Paramount+; New York, NY
+PayPal; San Jose, CA
+Peacock; New York, NY
+PepsiCo; Purchase, NY
+Pfizer; New York, NY
+Philip Morris International; New York, NY
+Phillips 66; Houston, TX
+Pizza Hut; Plano, TX
+PNC Financial Services; Pittsburgh, PA
+Popeyes; Miami, FL
+Procter & Gamble; Cincinnati, OH
+Progressive Corporation; Mayfield Village, OH
+Prudential Financial; Newark, NJ
+Public Service Enterprise Group; Newark, NJ
+Publix; Lakeland, FL
+Qualcomm; San Diego, CA
+Ralph Lauren Corporation; New York, NY
+Raytheon; Waltham, MA
+Realty Income; San Diego, CA
+Reebok; Boston, MA
+Regeneron; Tarrytown, NY
+Regions Financial Corporation; Birmingham, AL
+Revlon; New York, NY
+Rite Aid; Camp Hill, PA
+S&P Global; New York, NY
+Safeway; Pleasanton, CA
+Salesforce; San Francisco, CA
+Sam's Club; Bentonville, AR
+Schlumberger; Houston, TX
+Sears; Hoffman Estates, IL
+Sempra Energy; San Diego, CA
+Shell; Houston, TX
+SiriusXM; New York, NY
+Southwest Airlines; Dallas, TX
+SpaceX; Hawthorne, CA
+Stanley Black & Decker; New Britain, CT
+Starbucks; Seattle, WA
+State Farm Insurance; Bloomington, IL
+Subaru; Camden, NJ
+Subway; Milford, CT
+Taco Bell; Irvine, CA
+Target; Minneapolis, MN
+Tesla; Palo Alto, CA
+Texas Instruments; Dallas, TX
+The New York Times; New York, NY
+The Southern Company; Atlanta, GA
+The Wall Street Journal; New York, NY
+The Washington Post; Washington, DC
+Tim Hortons; Toronto, Canada
+T-Mobile US; Bellevue, WA
+Toyota; Plano, TX
+Trader Joe's; Monrovia, CA
+Travelers; New York, NY
+Turner Sports; Atlanta, GA
+Tyson Foods; Springdale, AR
+Ulta; Bolingbrook, IL
+Under Armour; Baltimore, MD
+Union Pacific Corporation; Omaha, NE
+United Airlines Holdings; Chicago, IL
+United Technologies Corporation; Farmington, CT
+UnitedHealth Group; Minnetonka, MN
+UPS; Atlanta, GA
+USA Today; McLean, VA
+Valero; San Antonio, TX
+Verizon; New York, NY
+Victoria's Secret; Columbus, OH
+Visa; Foster City, CA
+Volkswagen; Herndon, VA
+Volvo; Rockleigh, NJ
+Walgreens; Deerfield, IL
+Walmart; Bentonville, AR
+Waste Management; Houston, TX
+Wells Fargo; San Francisco, CA
+Wendy's; Dublin, OH
+Western Digital; San Jose, CA
+Weyerhaeuser; Seattle, WA
+Whole Foods; Austin, TX
+Williams Companies; Tulsa, OK
+Xcel Energy; Minneapolis, MN
+Xerox Corporation; Norwalk, CT
+Xilinx; San Jose, CA
+Yum! Brands; Louisville, KY
+Zimmer Biomet Holdings; Warsaw, IN
+Zions Bancorporation; Salt Lake City, UT

@@ -1,0 +1,35 @@
+model:
+  block_size: 512
+  vocab_size: 50257
+  n_layer: 12
+  n_head: 12
+  n_embd: 768
+  rope_base: 10000
+
+training:
+  run_name: "bios_single_fullname"
+  data_variant: "bios_single_fullname"    
+  train_split: "all"             
+  tokens_dir: "physics_llm3/bios_tokens" # absolute path to bios_tokens directory
+  max_lr: 1.0e-3
+  min_lr: 1.0e-4
+  weight_decay: 0.1
+  eps: 1.0e-6
+  max_steps: 80000
+  warmup_steps: 1000
+  batch_size: 24           # per GPU  →  total = batch_size * world_size * grad_accum
+  seq_len: 512
+  total_batch_size: 49152  # 96 sequences × 512 tokens  (Allen-Zhu batch_size=96)
+  grad_clip: 1.0
+  use_compile: false
+  log_dir: "logs/bios_single_fullname"
+
+eval:
+  val_interval: 0    
+  val_steps: 20
+  checkpoint_interval: 10000
+
+wandb:
+  entity: "your_name" # replace with your wandb username
+  project: "PhyLLM3"
+  dataset: "bioS_single_fullname"
