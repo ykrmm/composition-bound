@@ -1,0 +1,35 @@
+model:
+  block_size: 512
+  vocab_size: 50304       # bioG special tokens: [ENTITY] [RELATION] [VALUE]
+  n_layer: 12
+  n_head: 12
+  n_embd: 768
+  rope_base: 10000
+
+training:
+  run_name: "graph_bios_mixed_triple_explicit_implicit_30_35_35"
+  data_variant: "mixed_triple_explicit_implicit_30_35_35"
+  train_split: "all"
+  tokens_dir: "/lustre/fsn1/projects/rech/zws/uhw87vg/graph_bios_tokens"
+  max_lr: 1.0e-3
+  min_lr: 1.0e-4
+  weight_decay: 0.1
+  eps: 1.0e-6
+  max_steps: 800000
+  warmup_steps: 1000
+  batch_size: 24
+  seq_len: 512
+  total_batch_size: 49152
+  grad_clip: 1.0
+  use_compile: false
+  log_dir: "logs/graph_bios_mixed_triple_explicit_implicit_30_35_35"
+
+eval:
+  val_interval: 0
+  val_steps: 20
+  checkpoint_interval: 10000
+
+wandb:
+  entity: "ykrmm"
+  project: "GPT2"
+  dataset: "graph_bios_mixed_triple_explicit_implicit_30_35_35"

@@ -1,0 +1,31 @@
+model:
+  block_size: 512
+  vocab_size: 50257
+  n_layer: 12
+  n_head: 12
+  n_embd: 768
+  rope_base: 10000
+
+finetuning:
+  run_name:    "bios_multi5p_fullname_qa_qv8"
+  checkpoint:  "logs/bios_multi5p_fullname/bios_multi5p_fullname_399999.pt"
+  qa_train:    "qa_data/qa_train.jsonl"
+  qa_val:      "qa_data/qa_val.jsonl"
+  log_dir:     "logs/qa_multi5p_fullname_qv8"
+
+  # Allen-Zhu Appendix D canonical: q/v ∈ {8,16}, embed=128. 
+  lora_r_q:   8
+  lora_r_v:   8
+  lora_r_emb: 128
+
+  # Allen-Zhu Appendix D: lr 3e-4, wd 0.01, eps 1e-6,
+  # cosine schedule decaying to 10%, no warmup, batch 48, 50K steps.
+  max_lr:       3.0e-4
+  weight_decay: 0.01
+  eps:          1.0e-6
+  max_steps:    50000
+  batch_size:   48
+
+wandb:
+  entity:  "your_name" # replace with your wandb username
+  project: "PhyLLM3"

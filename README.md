@@ -1,122 +1,114 @@
-# PhysicsLLM 3.1 — Independent Replication
+# Multi-Hop Knowledge Composition — Code and Data
 
-An independent reimplementation of **"Physics of Language Models: Part 3.1, Knowledge Storage and Extraction"** (Allen-Zhu & Li, 2023). No official code was published by the authors.
-
-> **Note:** This is not the authors' code. It is an independent replication. All implementation decisions are our own.
-
----
-
-![Knowledge Extraction](assets/results_figure.png)
-*P_test exact-match accuracy on bioS multi5+permute+fullname. Our replication (97.5%).*
-
----
-
-## Results
-
-| Metric | Paper | This repo |
-|--------|-------|-----------|
-| P_test — multi5+permute+fullname (exact match) | ~96.2% | **97.5%** |
-| P_train — multi5+permute+fullname (first token) | ~97.0% | **100.0%** |
-| P_test — single | ~9.7% | ~9% |
-
----
-
-## Two Non-Trivial Bugs Found During Replication
-
-Getting from ~7% to 97.5% required finding and fixing two bugs that are easy to introduce and hard to diagnose. Documenting them here for anyone attempting their own replication.
-
-### Bug 1 — Pretrain data was not shuffled
-
-**What happened:** `generate_bios.py` produced bios grouped by person: all 5 paraphrases of person 0, then all 5 of person 1, etc. `tokenize_bios.py` concatenated them in that order. The dataloader read sequential 512-token windows with no shuffling.
-
-Each bio is ~90 tokens, so ~5.7 bios fit in one 512-token window. A single training window contained all 5 paraphrases of the same person. The model could cross-attend between paraphrases within the same context window instead of storing facts on the name embedding.
-
-**Result:** Perfect train loss (~0.013) but near-zero QA extraction (P_test ~7%). Knowledge was stored in a non-extractable form, exactly the failure mode Allen-Zhu & Li describe for `bioS single`, but caused by a data pipeline bug rather than augmentation design.
-
-**Fix:** `random.shuffle(texts)` before writing the dataset. After regenerating and re-pretraining: P_test jumped from 7% to ~97%.
-
-
+This repository contains the code for the experiments in the paper. It extends the synthetic biography framework (Allen-Zhu & Li, 2024) with inter-individual relations (friend, enemy) and multi-hop QA, and implements 9 pretraining augmentation strategies to study compositional generalization.
 
 ---
 
 ## Setup
 
 ```bash
-git clone https://github.com/ykrmm/PhysicsLLM_3.1
-cd PhysicsLLM_3.1
-pip install -r requirements.txt
+pip install torch==2.8.0 tiktoken numpy tqdm wandb pyyaml
 ```
 
-**Requirements:** Python 3.10+, PyTorch 2.8.0, HuggingFace Transformers, numpy. 
-
-I used 4xH100 for pretraining ~12 hours for multi5p and less than 2 hours for single.
+Experiments were run on 4×H100 GPUs. Pretraining takes ~8 hours, LoRA finetuning ~2 hours per experiment.
 
 ---
 
-## Reproducing the Main Result
+## Reproducing the experiments
 
-The full pipeline runs in three steps. SLURM scripts for Jean Zay are provided in `scripts/`.
-
-### Step 1 — Generate data
+### 1. Generate data
 
 ```bash
-bash scripts/generate_data.sh
+bash scripts/data/gen_phyllm_data.sh
 ```
 
-Generates `bios_multi5p_fullname.npy` (~37M tokens, shuffled). Produces 100K synthetic individuals with 6 attributes (birth_date, birth_city, university, major, company, company_city), 5 paraphrased biographies per person, sentence order shuffled, full name used in every sentence.
+This script generates all data needed for experiments 1–9:
 
-### Step 2 — Pretrain
+- `graph_bios_data/individuals.json` — 100K individuals with 6 attributes + friend/enemy relations
+- `graph_bios_data/bios_multi5p_fullname_all.txt` — 1-hop NL biographies (5 permuted reps per individual)
+- `graph_bios_data/bioG_2hop_nl_{implicit,explicit}_50k_all.txt` — 2-hop NL augmentation for P_comp
+- `graph_bios_data/bioG_2hop_triple_{implicit,explicit}_50k_all.txt` — 2-hop RDF augmentation for P_comp
+- Mixed pretrain corpora for each experiment (tokenized as `.npy`)
+- `graph_qa_data/` — 1-hop, 2-hop, 3-hop QA pairs
+
+**Population split.** The 100K individuals are split 50/50. P_comp (ids 0–49999) receives compositional augmentation during pretraining. P_held (ids 50000–99999) is restricted to atomic 1-hop biographies only; it never appears as a bridge entity in any compositional chain.
+
+### 2. Pretrain
 
 ```bash
-bash scripts/pretrain_multi5p_fullname.sh
+torchrun --standalone --nproc_per_node=4 train_bios.py --config configs/pretrain/expN.yaml
 ```
 
-Trains GPT2-small (124M params, rotary PE) from scratch on the generated data. ~400K steps, cosine LR schedule decaying to 10%, batch size 192, context window 512 tokens. Expected final loss: ~0.013.
+Replace `N` with the experiment number (2–9; see table below). The baseline (Exp 0) uses `configs/pretrain/baseline_phy_llm.yaml`.
 
-### Step 3 — LoRA QA finetune + eval
+All models are GPT-2 Small (124M, 12L/12H/768D) with rotary positional embeddings, trained from scratch. Training: 800K steps, batch 49152 tokens, cosine LR from 1e-3 to 1e-4, 1K warmup steps.
+
+### 3. LoRA finetune
 
 ```bash
-bash scripts/finetune_multi5p_fullname.sh
+python finetune_graph_qa.py --config configs/finetuning/expN.yaml
 ```
 
-LoRA finetune on QA pairs for P_train individuals (50K), evaluate on P_test (50K). LoRA config: r_qv=8, r_emb=128, cosine LR to 10%, 50K steps, batch 48. Expected P_test: ~97%.
+LoRA applied to query, value, and embedding layers. Training: 150K steps, batch 48, lr 3e-4. The finetuning config for each experiment contains the best (r_qv, r_emb) pair from the sweep reported in the paper (Table 13).
 
+### 4. Evaluate
 
+```bash
+python eval_graph_qa.py --config configs/finetuning/expN.yaml --lora_ckpt <path_to_lora.pt>
+```
 
-## Model & Data Details
-
-**Model:** GPT2-small architecture (12 layers, 12 attention heads, 768 hidden dimensions) with rotary positional embeddings (NeoX-style). ~124M parameters.
-
-**Data:** 100K synthetic individuals, sampled from fixed attribute pools:
-- Names: 400 first × 400 middle × 1000 last names
-- Dates: 200 × 12 × 28 combinations
-- Cities: 200 birth cities
-- Universities: 300 universities, 100 majors
-- Companies: 263 companies (company_city is deterministic)
-
-**Augmentation (multi5+permute+fullname):** 5 paraphrased biographies per person, sentence order shuffled across paraphrases, full name used in every sentence instead of pronouns.
-
-**QA finetuning:** LoRA on query/value attention matrices (r=16) + embedding layer (r=128). 50K QA pairs from P_train individuals, tested OOD on P_test individuals.
+Reports first-token accuracy (P_comp) and exact-match accuracy (P_held) for 1-hop, 2-hop, and 3-hop queries.
 
 ---
 
-## Citation
+## Experiment configurations
 
-If you use this code, please cite the original paper:
+| Exp | Augmentation | NL | RDF | Implicit | Explicit | Vocab |
+|-----|--------------|----|-----|----------|----------|-------|
+| 0   | Baseline (no augmentation) | — | — | — | — | 50257 |
+| 1   | 1-hop RDF | — | ✓ | — | — | 50304 |
+| 2   | 2-hop implicit NL | ✓ | — | ✓ | — | 50257 |
+| 3   | 2-hop explicit NL | ✓ | — | — | ✓ | 50257 |
+| 4   | 2-hop implicit RDF | — | ✓ | ✓ | — | 50304 |
+| 5   | 2-hop explicit RDF | — | ✓ | — | ✓ | 50304 |
+| 6   | 2-hop implicit + explicit RDF | — | ✓ | ✓ | ✓ | 50304 |
+| 7   | 2-hop implicit + explicit NL | ✓ | — | ✓ | ✓ | 50257 |
+| 8   | 2-hop implicit + explicit NL + RDF | ✓ | ✓ | ✓ | ✓ | 50304 |
+| 9   | All formats (incl. 1-hop RDF) | ✓ | ✓ | ✓ | ✓ | 50304 |
 
-```bibtex
-@article{allen2023physics,
-  title={Physics of language models: Part 3.1, knowledge storage and extraction},
-  author={Allen-Zhu, Zeyuan and Li, Yuanzhi},
-  journal={arXiv preprint arXiv:2309.14316},
-  year={2023}
-}
+Pretraining mix ratios follow Table 10 in the paper. All conditions include 1-hop NL biographies (multi5p-permute) for all 100K individuals.
+
+---
+
+## Repository structure
+
+```
+.
+├── model.py                    # GPT-2 with RoPE
+├── train_bios.py               # Distributed pretraining
+├── finetune_qa.py              # LoRA finetuning (baseline / phy-llm)
+├── finetune_graph_qa.py        # LoRA finetuning (multi-hop, multi-file QA)
+├── eval_qa.py                  # Evaluation (baseline)
+├── eval_graph_qa.py            # Evaluation (multi-hop, per-hop breakdown)
+├── gen_data/
+│   ├── generate_graph_bios.py  # 1-hop NL biographies with relations
+│   ├── generate_bioG_2hop_nl.py    # 2-hop NL augmentation
+│   ├── generate_bioG_2hop_triple.py # 2-hop RDF augmentation
+│   ├── generate_graph_qa.py    # 1/2/3-hop QA pairs
+│   ├── mix_pretrain.py         # Combine corpora at given ratios
+│   ├── tokenizer_graph_bios.py # GPT-2 tokenizer + [ENTITY]/[RELATION]/[VALUE] tokens
+│   └── bioG_common.py          # Shared constants and utilities
+├── configs/
+│   ├── pretrain/               # exp0 (baseline) + exp2–exp9
+│   └── finetuning/             # exp2–exp9 (LoRA configs)
+└── scripts/
+    ├── data/                   # Data generation scripts
+    ├── mhqa/                   # SLURM job scripts (gitignored)
+    └── phy_llm/                # Baseline (1-hop) pipeline scripts
 ```
 
 ---
 
-## Notes
+## Notes on vocabulary size
 
-This replication was carried out as part of ongoing research on graph-structured knowledge injection in language models. The debugging history documenting the two bugs above is preserved in full in `logs/qa_finetune_gap_diagnosis.md`.
-
-Compute: H100 GPUs (Jean Zay, IDRIS, France).
+Experiments using RDF triples (Exp 1, 4, 5, 6, 8, 9) extend the GPT-2 vocabulary with five special tokens — `[ENTITY]` (50257), `[RELATION]` (50258), `[VALUE]` (50259), `[LINKED]` (50260), `[END_ENTITY]` (50261) — padded to 50304 (multiple of 64 for tensor core alignment). NL-only experiments use the standard GPT-2 vocabulary (50257).

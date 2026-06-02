@@ -147,3 +147,5 @@ Thumbs.db
 bios_data/
 bios_tokens/
 qa_data/
+
+scripts/mhqa/slurm/

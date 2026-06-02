@@ -1,0 +1,35 @@
+model:
+  block_size: 512
+  vocab_size: 50257
+  n_layer: 12
+  n_head: 12
+  n_embd: 768
+  rope_base: 10000
+
+training:
+  run_name: "bios_multi5p_fullname"
+  data_variant: "bios_multi5p_fullname"
+  tokens_dir: "physics_llm3/bios_tokens" # absolute path to bios_tokens directory
+  max_lr: 1.0e-3
+  min_lr: 1.0e-4
+  weight_decay: 0.1
+  eps: 1.0e-6
+  max_steps: 400000
+  warmup_steps: 1000
+  batch_size: 24
+  seq_len: 512
+  total_batch_size: 49152
+  grad_clip: 1.0
+  use_compile: false
+  train_split: "all"             # "all" = 100K individuals (correct), "train" = 50K only
+  log_dir: "logs/bios_multi5p_fullname"
+
+eval:
+  val_interval: 0    # 0 = no val during pretraining (all 100K are training data)
+  val_steps: 20
+  checkpoint_interval: 10000
+
+wandb:
+  entity: "your_name" # replace with your wandb username
+  project: "PhyLLM3"
+  dataset: "bioS_multi5p_fullname"

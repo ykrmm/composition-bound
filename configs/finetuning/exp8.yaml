@@ -1,0 +1,36 @@
+model:
+  block_size: 512
+  vocab_size: 50304       # bioG special tokens
+  n_layer: 12
+  n_head: 12
+  n_embd: 768
+  rope_base: 10000
+
+finetuning:
+  run_name:    "graph_bios_mixed_nl_triple_all4_30_175x4_qa_1hop2hop_ft_qv8_emb64"
+  checkpoint:  "logs/graph_bios_mixed_nl_triple_all4_30_175x4/graph_bios_mixed_nl_triple_all4_30_175x4_799999.pt"
+
+  qa_train:
+    - graph_qa_data/qa_1hop_train_ft.jsonl
+    - graph_qa_data/qa_2hop_train_ft.jsonl
+
+  qa_val:
+    - graph_qa_data/qa_1hop_val.jsonl
+    - graph_qa_data/qa_2hop_val.jsonl
+    - graph_qa_data/qa_3hop_val.jsonl
+
+  log_dir:     "logs/qa_graph_mixed_nl_triple_all4_30_175x4_1hop2hop_ft_qv8_emb64"
+
+  lora_r_q:   8
+  lora_r_v:   8
+  lora_r_emb: 64
+
+  max_lr:       3.0e-4
+  weight_decay: 0.01
+  eps:          1.0e-6
+  max_steps:    150000
+  batch_size:   48
+
+wandb:
+  entity:  "ykrmm"
+  project: "GPT2"
