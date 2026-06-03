@@ -1,6 +1,6 @@
-# Multi-Hop Knowledge Composition — Code and Data
+# [EMNLP 2026 Submission] Multi-Hop Knowledge Composition is Bound by Pretraining Exposure
 
-This repository contains the code for the experiments in the paper. It extends the synthetic biography framework (Allen-Zhu & Li, 2024) with inter-individual relations (friend, enemy) and multi-hop QA, and implements 9 pretraining augmentation strategies to study compositional generalization.
+This repository contains the code for the submitted EMNLP 2026 paper "Multi-Hop Knowledge Composition is Bound by Pretraining Exposure". It extends the synthetic biography framework (Phy. LLM 3.1) with inter-individual relations (friend, enemy) and multi-hop QA. It presents also the 9 pretraining augmentation strategies to study compositional generalization.
 
 ---
 
