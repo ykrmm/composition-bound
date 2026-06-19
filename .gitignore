@@ -150,3 +150,5 @@ qa_data/
 graph_qa_data/
 
 scripts/mhqa/slurm/
+weights/
+*.slurm

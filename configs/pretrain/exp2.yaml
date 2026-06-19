@@ -7,8 +7,8 @@ model:
   rope_base: 10000
 
 training:
-  run_name: "graph_bios_mixed_nl_explicit_30_70"
-  data_variant: "mixed_nl_explicit_30_70"
+  run_name: "graph_bios_mixed_nl_implicit_30_70"
+  data_variant: "mixed_nl_implicit_30_70"
   train_split: "all"
   tokens_dir: "/lustre/fsn1/projects/rech/zws/uhw87vg/graph_bios_tokens"
   max_lr: 1.0e-3
@@ -22,7 +22,7 @@ training:
   total_batch_size: 49152
   grad_clip: 1.0
   use_compile: false
-  log_dir: "logs/graph_bios_mixed_nl_explicit_30_70"
+  log_dir: "logs/graph_bios_mixed_nl_implicit_30_70"
 
 eval:
   val_interval: 0
@@ -32,4 +32,4 @@ eval:
 wandb:
   entity: "ykrmm"
   project: "GPT2"
-  dataset: "graph_bios_mixed_nl_explicit_30_70"
+  dataset: "graph_bios_mixed_nl_implicit_30_70"
