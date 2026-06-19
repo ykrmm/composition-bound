@@ -103,7 +103,7 @@ Pretraining mix ratios follow Table 10 in the paper. All conditions include 1-ho
 │   └── finetuning/             # exp2–exp9 (LoRA configs)
 └── scripts/
     ├── data/                   # Data generation scripts
-    ├── mhqa/                   # SLURM job scripts (gitignored)
+    ├── mhqa/                   # End-to-end pipeline scripts (pretrain → finetune → eval)
     └── phy_llm/                # Baseline (1-hop) pipeline scripts
 ```
 
