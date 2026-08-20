@@ -1,4 +1,4 @@
-# [EMNLP 2026 Submission] Multi-Hop Knowledge Composition is Bound by Pretraining Exposure
+# Multi-Hop Knowledge Composition is Bound by Pretraining Exposure. *EMNLP'26 Main Conference*
 
 This repository contains the code for the submitted EMNLP 2026 paper "Multi-Hop Knowledge Composition is Bound by Pretraining Exposure". It extends the synthetic biography framework (Phy. LLM 3.1) with inter-individual relations (friend, enemy) and multi-hop QA. It presents also the 9 pretraining augmentation strategies to study compositional generalization.
 
